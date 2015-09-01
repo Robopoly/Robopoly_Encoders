@@ -1,7 +1,7 @@
 
 #include "RomEnco.h"
 
-RomEnco enco(2,3);
+RomEnco enco(13);
 
 void setup(void)
 {
@@ -10,6 +10,5 @@ void setup(void)
 
 void loop(void)
 {
-	int16_t p;
-	p = enco.getPosition();
+
 }

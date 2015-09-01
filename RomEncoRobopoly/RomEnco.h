@@ -3,23 +3,24 @@
 
 namespace rer
 {
-	typedef enum {S1, S2, S3, S4} State;
+	enum Quarter {Q1, Q2, Q3, Q4};
 }
 
 class RomEnco
 {
-	private:
+private:
+	static uint8_t _encoderAmount;
+	volatile rer::Quarter _lastQuarter;
+	volatile rer::Quarter _currentQuarter;
+	static volatile uint8_t _pinA, _pinB;
+	static volatile uint8_t _ledState;
 
-		static uint8_t _encoderAmount;
-		rer::State _state;
-		uint8_t _pinA;
+	void _SetupTimer4(void);
 
-		void _setupInterrupt(void);
+public:
+	RomEnco(uint8_t pinA);
+	~RomEnco();
 
-	public:
-
-		RomEnco(uint8_t pinA, uint8_t pinB);
-		~RomEnco();
-
-		int16_t getPosition(void);
+	static void _Update(void);
+	int16_t getPosition(void);
 };
