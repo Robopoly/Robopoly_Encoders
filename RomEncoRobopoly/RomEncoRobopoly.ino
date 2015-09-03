@@ -1,7 +1,7 @@
 
 #include "RomEnco.h"
 
-RomEnco enco(13);
+RomEnco enco(2,3);
 
 void setup(void)
 {
