@@ -2,22 +2,29 @@
 #include <Arduino.h>
 
 
+// Use the debug pin to know when the ISR occurs?
+#define ROM_ENCO_DEBUG 1
+// The debug pin.
+#define ROM_ENCO_DEBUG_PIN 13
+// Max amount of encoders.
+#define ROM_ENCO_MAX_ENCODER_AMOUNT 4
+
+
 class RomEnco
 {
 private:
-	// Use the debug pin to know when the ISR occurs.
-	static const bool _debug;
-	// The debug pin.
-	static const uint8_t _debugPin;
-	// Max encoder amount
+	// Encoder amount
 	static uint8_t _encoderAmount;
+	// Id of the instance.
+	uint8_t _id;
 	// Where to read the A and B signals.
-	static uint8_t _pinA, _pinB;
-	// The corresponding signal (current and previous state).
-	static volatile uint8_t _pinAState, _pinBState,
-		_oldPinAState, _oldPinBState;
-	// The position.
-	static volatile long _position;
+	static uint8_t _pinA[ROM_ENCO_MAX_ENCODER_AMOUNT],
+		_pinB[ROM_ENCO_MAX_ENCODER_AMOUNT];
+	// The corresponding signals.
+	static volatile uint8_t _pinAState [ROM_ENCO_MAX_ENCODER_AMOUNT],
+		_pinBState[ROM_ENCO_MAX_ENCODER_AMOUNT];
+	// The positions.
+	static volatile long _position[ROM_ENCO_MAX_ENCODER_AMOUNT];
 	// Setup timer 4.
 	void _SetupTimer4(void);
 
@@ -27,7 +34,7 @@ public:
 	// Destructor
 	~RomEnco();
 
-	// Update the position.
+	// Update the positions.
 	static void update(void);
 	// Get the position.
 	long getPosition(void);
