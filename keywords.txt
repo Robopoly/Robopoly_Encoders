@@ -7,7 +7,7 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-RomeEnco	KEYWORD1
+RomEnco	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
