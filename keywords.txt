@@ -1,0 +1,25 @@
+#######################################
+# Syntax Coloring Map For PRismino
+# Only 1 tab between values and type!
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+RomeEnco	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+getPosition	KEYWORD2
+resetPosition	KEYWORD2
+getIncrement	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+# none
+

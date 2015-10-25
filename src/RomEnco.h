@@ -51,6 +51,7 @@
 #define ROM_ENCO_MAX_ENCODER_AMOUNT 4
 
 #ifndef _ROM_ENCO_H_
+#define _ROM_ENCO_H_
 
 class RomEnco
 {
