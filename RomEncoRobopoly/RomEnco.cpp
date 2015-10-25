@@ -61,7 +61,7 @@ void RomEnco::update(void)
 		digitalWrite(_debugPin, 1);
 
 	// Tune the period of the timer (should be less than 500 us).
-	TCNT4 = 200;
+	TCNT4 = 250;
 
 	// Poll the encoders and store the previous state.
 	_oldPinAState = _pinAState;
