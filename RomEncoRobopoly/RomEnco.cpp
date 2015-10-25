@@ -29,6 +29,16 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
+  /***************************************************************************************
+ *
+ * Title:       RomEnco library v1.5
+ * File:        RomEnco.cpp
+ * Date:        2015-10-25
+ * Author:      David Wuthier
+ * Website:     https://github.com/Robopoly/Robopoly_RomEnco
+ *
+ ***************************************************************************************/
+
 
 #include "RomEnco.h"
 

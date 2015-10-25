@@ -28,7 +28,17 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
- 
+
+ /***************************************************************************************
+ *
+ * Title:       RomEnco library v1.5
+ * File:        RomEnco.h
+ * Date:        2015-10-25
+ * Author:      David Wuthier
+ * Website:     https://github.com/Robopoly/Robopoly_RomEnco
+ *
+ ***************************************************************************************/
+
 
 #include <Arduino.h>
 
@@ -40,6 +50,7 @@
 // Max amount of encoders.
 #define ROM_ENCO_MAX_ENCODER_AMOUNT 4
 
+#ifndef _ROM_ENCO_H_
 
 class RomEnco
 {
@@ -74,3 +85,5 @@ public:
 	// Get the position and then reset it.
 	long getIncrement(void);
 };
+
+#endif /* _ROM_ENCO_H_ */

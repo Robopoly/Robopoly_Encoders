@@ -29,6 +29,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
+/***************************************************************************************
+ *
+ * Title:       Omniwheel Setup
+ * Description: Display the amount of increments (in division) between each sampling
+ *				time for three encoders.
+ *
+ ***************************************************************************************/
+
 
 #include "RomEnco.h"
 
