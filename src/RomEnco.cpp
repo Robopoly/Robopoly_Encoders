@@ -91,10 +91,17 @@ ISR (TIMER4_OVF_vect)
 
 void RomEnco::_SetupTimer4(void)
 {
-	// Enable timer 4 with no divider.
-	TCCR4B = 0b00000001;
-	// Enable timer 4 overflow ISR.
-	TIMSK4 = 0b00000100;
+	#ifdef __AVR_ATmega2560__
+		// Enable timer 4 with no divider.
+		TCCR4B = 0b00000001;
+		// Enable timer 4 overflow ISR.
+		TIMSK4 = 0b00000001;
+	#elif defined (__AVR_ATmega32U4__)
+		// Enable timer 4 with no divider.
+		TCCR4B = 0b00000001;
+		// Enable timer 4 overflow ISR.
+		TIMSK4 = 0b00000100;
+	#endif
 }
 
 // Update the position.
