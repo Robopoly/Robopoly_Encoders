@@ -47,7 +47,7 @@
 
 
 // Use the debug pin to know when the ISR occurs?
-#define ROM_ENCO_DEBUG 0
+#define ROM_ENCO_DEBUG 1
 // The debug pin.
 #define ROM_ENCO_DEBUG_PIN 13
 // Max amount of encoders.

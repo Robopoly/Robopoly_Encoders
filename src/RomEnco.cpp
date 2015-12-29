@@ -116,7 +116,7 @@ void RomEnco::update(void)
 	TCNT4 = 250;
 
 	// Temporary variables.
-	bool oldPinAState, oldPinBState, tmpA, tmpB;
+	static bool oldPinAState, oldPinBState;
 
 	// Poll each instanciated encoder.
 	for (uint8_t i = 0; i < _encoderAmount; i++)
@@ -129,11 +129,9 @@ void RomEnco::update(void)
 
 		// Apply the sommer algorithm to determine whether the
 		// position is incremented or decremented.
-		tmpA = (oldPinBState != _pinAState[i]);
-		tmpB = (oldPinAState != _pinBState[i]);
-		if (tmpA && !tmpB)
+		if ((oldPinBState != _pinAState[i]) && !(oldPinAState != _pinBState[i]))
 			_position[i]--;
-		if (!tmpA && tmpB)
+		if (!(oldPinBState != _pinAState[i]) && (oldPinAState != _pinBState[i]))
 			_position[i]++;
 	}
 

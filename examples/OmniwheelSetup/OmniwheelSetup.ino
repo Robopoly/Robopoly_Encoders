@@ -44,9 +44,9 @@
 // Instanciate an encoder on pins 2 and 3,
 RomEnco enco1(2, 3);
 // another on pins 4 and 5
-RomEnco enco2(4, 5);
+// RomEnco enco2(4, 5);
 // and a last on pins 6 and 7.
-RomEnco enco3(6, 7);
+// RomEnco enco3(6, 7);
 
 void setup(void)
 {
@@ -58,10 +58,10 @@ void loop(void)
 {
 	// Display the increment (in divisions) each 200 ms for each encoder.
 	Serial.print(enco1.getIncrement());
-	Serial.print(", ");
-	Serial.print(enco2.getIncrement());
-	Serial.print(", ");
-	Serial.print(enco3.getIncrement());
-	Serial.println(",");
+	Serial.println(" ");
+	// Serial.print(enco2.getIncrement());
+	// Serial.print(", ");
+	// Serial.print(enco3.getIncrement());
+	// Serial.println(",");
 	delay(200);
 }
