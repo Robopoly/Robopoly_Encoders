@@ -53,7 +53,17 @@ volatile long RomEnco::_position[ROM_ENCO_MAX_ENCODER_AMOUNT] = {0, 0, 0, 0};
 
 
 // Constructor.
-RomEnco::RomEnco(uint8_t pinA, uint8_t pinB)
+RomEnco::RomEnco()
+{
+}
+
+// Destructor.
+RomEnco::~RomEnco()
+{
+}
+
+// Constructor.
+void RomEnco::begin(uint8_t pinA, uint8_t pinB)
 {
 	// If first encoder instantiated, setup timer 4.
 	if (_encoderAmount == 0)
@@ -77,12 +87,6 @@ RomEnco::RomEnco(uint8_t pinA, uint8_t pinB)
 	#endif
 }
 
-// Destructor.
-RomEnco::~RomEnco()
-{
-
-}
-
 ISR (TIMER4_OVF_vect)
 {
 	// Update the position via timer 4 ISR.
@@ -98,7 +102,7 @@ void RomEnco::_SetupTimer4(void)
 		TIMSK4 = 0b00000001;
 	#elif defined (__AVR_ATmega32U4__)
 		// Enable timer 4 with no divider.
-		TCCR4B = 0b00000001;
+		TCCR4B = 0b00000101;
 		// Enable timer 4 overflow ISR.
 		TIMSK4 = 0b00000100;
 	#endif
@@ -113,7 +117,7 @@ void RomEnco::update(void)
 	#endif
 
 	// Tune the period of the timer (should be less than 500 us).
-	TCNT4 = 250;
+	// TCNT4 = 250;
 
 	// Temporary variables.
 	static bool oldPinAState, oldPinBState;

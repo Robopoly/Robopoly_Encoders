@@ -41,15 +41,15 @@
 #include "RomEnco.h"
 
 
-// Instanciate an encoder on pins 2 and 3,
-RomEnco enco1(2, 3);
-// another on pins 4 and 5
-// RomEnco enco2(4, 5);
-// and a last on pins 6 and 7.
-// RomEnco enco3(6, 7);
+// Instanciate 3 encoders
+RomEnco enco[3];
 
 void setup(void)
 {
+  // Start timer and each encoder on desired pins.
+  enco[0].begin(2,3);
+  enco[1].begin(4,5);
+  enco[2].begin(6,7);
 	// Begin serial for debugging.
 	Serial.begin(57600);
 }
@@ -57,11 +57,11 @@ void setup(void)
 void loop(void)
 {
 	// Display the increment (in divisions) each 200 ms for each encoder.
-	Serial.print(enco1.getIncrement());
-	Serial.println(" ");
-	// Serial.print(enco2.getIncrement());
-	// Serial.print(", ");
-	// Serial.print(enco3.getIncrement());
-	// Serial.println(",");
+	Serial.print(enco[0].getIncrement());
+	Serial.print(", ");
+	Serial.print(enco[1].getIncrement());
+	Serial.print(", ");
+	Serial.print(enco[2].getIncrement());
+	Serial.println(",");
 	delay(200);
 }

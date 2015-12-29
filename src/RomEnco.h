@@ -74,10 +74,12 @@ private:
 
 public:
 	// Constuctor with the A and B pins.
-	RomEnco(uint8_t pinA, uint8_t pinB);
+	RomEnco();
 	// Destructor
 	~RomEnco();
 
+  // Select pins and start interrupt routine.
+  void begin(uint8_t pinA, uint8_t pinB);
 	// Update the positions.
 	static void update(void);
 	// Get the position.
