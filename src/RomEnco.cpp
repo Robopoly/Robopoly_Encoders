@@ -55,6 +55,7 @@ volatile long RomEnco::_position[ROM_ENCO_MAX_ENCODER_AMOUNT] = {0, 0, 0, 0};
 // Constructor.
 RomEnco::RomEnco()
 {
+  // Nothing has to be done here, as the Arduino environnement may overwrite some settings.
 }
 
 // Destructor.
@@ -62,12 +63,12 @@ RomEnco::~RomEnco()
 {
 }
 
-// Constructor.
+// Arduino constructor.
 void RomEnco::begin(uint8_t pinA, uint8_t pinB)
 {
-	// If first encoder instantiated, setup timer 4.
+	// If first encoder instantiated, setup timer #timerId.
 	if (_encoderAmount == 0)
-		_SetupTimer4();
+		_SetupTimer();
 	// Increment encoder amount if smaller than maximum.
 	if (_encoderAmount < ROM_ENCO_MAX_ENCODER_AMOUNT)
 		_encoderAmount++;
@@ -82,22 +83,71 @@ void RomEnco::begin(uint8_t pinA, uint8_t pinB)
 	pinMode(_pinB[_id], INPUT);
 
 	// If debug enabled, set debug pin as output.
-	#if ROM_ENCO_DEBUG
+	#ifdef ROM_ENCO_DEBUG
 		pinMode(ROM_ENCO_DEBUG_PIN, OUTPUT);
 	#endif
 }
 
-ISR (TIMER4_OVF_vect)
-{
-	// Update the position via timer 4 ISR.
-	RomEnco::update();
-}
+#ifdef ROME_ENCO_USE_TIMER0
+	ISR (TIMER0_OVF_vect)
+#endif
+#ifdef ROME_ENCO_USE_TIMER1
+	ISR (TIMER1_OVF_vect)
+#endif
+#ifdef ROME_ENCO_USE_TIMER3
+	ISR (TIMER3_OVF_vect)
+#endif
+#ifdef ROME_ENCO_USE_TIMER4
+	ISR (TIMER4_OVF_vect)
+#endif
+	{
+		// Update the position via timer X ISR.
+		RomEnco::update();
+	}
 
-void RomEnco::_SetupTimer4(void)
+
+
+#endif
+
+void RomEnco::_SetupTimer(void)
 {
+#ifdef ROME_ENCO_USE_TIMER0
+	#ifdef __AVR_ATmega2560__
+	// TODO
+	#elif defined (__AVR_ATmega32U4__)
+		// Enable timer 4 with no divider.
+		TCCR0B = 0b00000101;
+		// Enable timer 4 overflow ISR.
+		TIMSK0 = 0b00000001;
+	#endif
+#endif
+
+#ifdef ROME_ENCO_USE_TIMER1
+	#ifdef __AVR_ATmega2560__
+	// TODO
+	#elif defined (__AVR_ATmega32U4__)
+		// Enable timer 4 with no divider.
+		TCCR1B = 0b00000101;
+		// Enable timer 4 overflow ISR.
+		TIMSK1 = 0b00000001;
+	#endif
+#endif
+
+#ifdef ROME_ENCO_USE_TIMER3
+	#ifdef __AVR_ATmega2560__
+	// TODO
+	#elif defined (__AVR_ATmega32U4__)
+		// Enable timer 4 with no divider.
+		TCCR3B = 0b00000101;
+		// Enable timer 4 overflow ISR.
+		TIMSK3 = 0b00000001;
+	#endif
+#endif
+
+#ifdef ROME_ENCO_USE_TIMER4
 	#ifdef __AVR_ATmega2560__
 		// Enable timer 4 with no divider.
-		TCCR4B = 0b00000001;
+		TCCR4B = 0b00000101;
 		// Enable timer 4 overflow ISR.
 		TIMSK4 = 0b00000001;
 	#elif defined (__AVR_ATmega32U4__)
@@ -106,18 +156,30 @@ void RomEnco::_SetupTimer4(void)
 		// Enable timer 4 overflow ISR.
 		TIMSK4 = 0b00000100;
 	#endif
+#endif
 }
 
 // Update the position.
 void RomEnco::update(void)
 {
 	// If debug enabled, indicate that the ISR begins.
-	#if ROM_ENCO_DEBUG
+#ifdef ROM_ENCO_DEBUG
 		digitalWrite(ROM_ENCO_DEBUG_PIN, 1);
-	#endif
+#endif
 
-	// Tune the period of the timer (should be less than 500 us).
-	// TCNT4 = 250;
+// Adjust timer period if needed.
+/*#ifdef ROME_ENCO_USE_TIMER0
+	TCNT0 = 100;
+#endif
+#ifdef ROME_ENCO_USE_TIMER1
+	TCNT1 = 100;
+#endif
+#ifdef ROME_ENCO_USE_TIMER3
+	TCNT3 = 100;
+#endif
+#ifdef ROME_ENCO_USE_TIMER4
+	TCNT4 = 100;
+#endif*/
 
 	// Temporary variables.
 	static bool oldPinAState, oldPinBState;
@@ -140,9 +202,9 @@ void RomEnco::update(void)
 	}
 
 	// If debug enabled, indicate that the ISR ends.
-	#if ROM_ENCO_DEBUG
+#ifdef ROM_ENCO_DEBUG
 		digitalWrite(ROM_ENCO_DEBUG_PIN, 0);
-	#endif
+#endif
 }
 
 // Get the position.

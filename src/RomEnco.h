@@ -41,17 +41,22 @@
 
 #ifndef _ROM_ENCO_H_
 #define _ROM_ENCO_H_
- 
+
 
 #include <Arduino.h>
 
 
-// Use the debug pin to know when the ISR occurs?
-#define ROM_ENCO_DEBUG 1
+// Use the debug pin to know when the ISR occurs
+// #define ROM_ENCO_DEBUG
 // The debug pin.
 #define ROM_ENCO_DEBUG_PIN 13
 // Max amount of encoders.
 #define ROM_ENCO_MAX_ENCODER_AMOUNT 4
+// Select which timer to use
+// #define ROME_ENCO_USE_TIMER0
+// #define ROME_ENCO_USE_TIMER1
+// #define ROME_ENCO_USE_TIMER3
+#define ROME_ENCO_USE_TIMER4
 
 
 class RomEnco
@@ -70,7 +75,7 @@ private:
 	// The positions.
 	static volatile long _position[ROM_ENCO_MAX_ENCODER_AMOUNT];
 	// Setup timer 4.
-	void _SetupTimer4(void);
+	void _SetupTimer(void);
 
 public:
 	// Constuctor with the A and B pins.

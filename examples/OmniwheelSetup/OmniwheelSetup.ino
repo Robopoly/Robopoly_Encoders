@@ -46,9 +46,13 @@ RomEnco enco[3];
 
 void setup(void)
 {
-  // Start timer and each encoder on desired pins.
+  // Setup encoder 0 on pin 2 and 3. The interrupt routine will be run
+  // on timer 4 (what can be changed by commenting/uncommenting #defines
+  // in the library).
   enco[0].begin(2,3);
+  // Setup encoder 1 on pin 4 and 5.
   enco[1].begin(4,5);
+  // Setup encoder 2 on pin 6 and 7.
   enco[2].begin(6,7);
 	// Begin serial for debugging.
 	Serial.begin(57600);
@@ -56,12 +60,12 @@ void setup(void)
 
 void loop(void)
 {
-	// Display the increment (in divisions) each 200 ms for each encoder.
-	Serial.print(enco[0].getIncrement());
+	// Display the position (in divisions) each 200 ms for each encoder.
+	Serial.print(enco[0].getPosition());
 	Serial.print(", ");
-	Serial.print(enco[1].getIncrement());
+	Serial.print(enco[1].getPosition());
 	Serial.print(", ");
-	Serial.print(enco[2].getIncrement());
+	Serial.print(enco[2].getPosition());
 	Serial.println(",");
 	delay(200);
 }
