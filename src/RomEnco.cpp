@@ -107,8 +107,6 @@ void RomEnco::begin(uint8_t pinA, uint8_t pinB)
 
 
 
-#endif
-
 void RomEnco::_SetupTimer(void)
 {
 #ifdef ROME_ENCO_USE_TIMER0
