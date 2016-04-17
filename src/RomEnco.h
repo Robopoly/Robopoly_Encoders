@@ -55,8 +55,8 @@
 // Select which timer to use
 // #define ROME_ENCO_USE_TIMER0
 // #define ROME_ENCO_USE_TIMER1
-// #define ROME_ENCO_USE_TIMER3
-#define ROME_ENCO_USE_TIMER4
+#define ROME_ENCO_USE_TIMER3
+// #define ROME_ENCO_USE_TIMER4
 
 
 class RomEnco
