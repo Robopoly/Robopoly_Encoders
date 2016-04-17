@@ -37,4 +37,5 @@ The RomeEnco library has a debug mode which allows us to output a pulse on a spe
   * `int counter = encoder1.getPosition();`
 
 ## Features coming soon
-* Add a convenient way to change the Timer frequency
+* Implement a convenient way to change the Timer frequency
+* Implement compatibility with AVR ATmega2560
